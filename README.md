@@ -1,4 +1,4 @@
-# Math as a (µ) Service - MaaS
+# Math as a (µ)service - MaaS
 
 A ideia desse exercício é mostrar com seria uma arquitetura simples de micro-serviços.
 
