@@ -16,7 +16,7 @@ setup(
     author_email="daltonmatos@gmail.com",
     license="MIT",
     classifiers=["Programming Language :: Python :: 3.7"],
-    packages=find_packages(exclude=["contrib", "docs", "tests*"]),
+    packages=find_packages(exclude=["docs", "tests*"]),
     install_requires=["aiohttp==3.5.4", "pydantic==0.26"],
     entry_points={},
 )
