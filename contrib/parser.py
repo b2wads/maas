@@ -21,6 +21,10 @@ import copy
 import math
 import re
 
+from maas.client import MathClient
+
+client = MathClient()
+
 
 # A general node-related exception
 class NodeException(Exception):
@@ -362,6 +366,10 @@ class Value(Node):
         # Evaluate the node
 
     def evaluate(self):
+        return float(self.value)
+        # The length of the value
+
+    async def eval(self):
         return float(self.value)
         # The length of the value
 
@@ -837,6 +845,12 @@ class Plus(Operation):
             return self.left.evaluate() + self.right.evaluate()
         else:
             raise NodeException("Node does not have enough children.")
+
+    async def eval(self) -> float:
+        lval = await self.left.eval()
+        rval = await self.right.eval()
+        result = await client.plus(lval, rval)
+        return float(result["result"])
 
 
 # Subtract two nodes

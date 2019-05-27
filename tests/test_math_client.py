@@ -1,5 +1,6 @@
 from aioresponses import aioresponses
 from asynctest import TestCase
+from yarl import URL
 
 from maas.client import MathClient, default_http_client_timeout
 
@@ -19,4 +20,10 @@ class MathClientTest(TestCase):
         with aioresponses() as rsps:
             rsps.post("http://plus.service", payload={"result": 10})
             result = await self.client.plus(5, 5)
+            request_plus = rsps.requests[("POST", URL("http://plus.service"))][
+                0
+            ]
             self.assertEqual(result, {"result": 10})
+            self.assertEqual(
+                request_plus.kwargs["json"], {"left": 5, "right": 5}
+            )
