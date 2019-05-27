@@ -1,3 +1,5 @@
+import os
+
 from pydantic import BaseSettings
 
 
@@ -10,7 +12,7 @@ class Settings(BaseSettings):
     POWER_SERVICE_ADDRESS: str = ""
 
     class Config:
-        env_prefix = "MAAS_"
+        env_prefix = os.getenv("ENV", "MAAS") + "_"
 
 
 settings = Settings()

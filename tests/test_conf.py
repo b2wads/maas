@@ -13,6 +13,7 @@ class ConfTest(TestCase):
     async def test_load_service_addrs_from_env(self):
         with mock.patch.dict(
             os.environ,
+            ENV="MAAS",
             MAAS_PLUS_SERVICE_ADDRESS="http://plus.pe.hmg.asgard.b2w.io",
             MAAS_MINUS_SERVICE_ADDRESS="http://minus.pe.hmg.asgard.b2w.io",
             MAAS_DIVIDE_SERVICE_ADDRESS="http://divide.pe.hmg.asgard.b2w.io",
