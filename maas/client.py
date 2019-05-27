@@ -1,4 +1,5 @@
-from aiohttp import ClientSession, ClientTimeout
+from aiohttp import ClientSession
+from aiohttp.client import ClientTimeout
 
 from maas.conf import settings
 
