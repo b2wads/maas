@@ -15,12 +15,6 @@ class ParserTest(TestCase):
     async def setUp(self):
         pass
 
-    async def test_plus_async_eval(self):
-        plus = Plus()
-        plus.addChild(Value("5"))
-        plus.addChild(Value("5"))
-        self.assertEqual(10, await plus.eval())
-
     async def test_plus_calls_service(self):
         plus = Plus()
         plus.addChild(Value("4"))
