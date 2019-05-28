@@ -4,7 +4,13 @@ from aioresponses import aioresponses, CallbackResult
 
 from maas.calc.app import app
 from tests.base import BaseApiTestCase
-from tests.util import plus_service_callback
+from tests.util import (
+    plus_service_callback,
+    minus_service_callback,
+    multiply_service_callback,
+    divide_service_callback,
+    power_service_callback,
+)
 
 
 class CalcEndpointTest(BaseApiTestCase):
@@ -58,3 +64,30 @@ class CalcEndpointTest(BaseApiTestCase):
             self.assertEqual(result.status, 200)
             data = await result.json()
             self.assertEqual(data, {"result": 6})
+
+    async def test_complex_expression_multiple_operations(self):
+        with aioresponses(passthrough=["http://127.0.0.1"]) as rsps:
+            rsps.post("http://plus.service", callback=plus_service_callback)
+            rsps.post(
+                "http://multiply.service", callback=multiply_service_callback
+            )
+            result = await self.client.post("/eval", json={"expr": "8 + 2 * 3"})
+            self.assertEqual(result.status, 200)
+            data = await result.json()
+            self.assertEqual(data, {"result": 14})
+
+    async def test_complex_expression_multiple_repeated_operations(self):
+        with aioresponses(passthrough=["http://127.0.0.1"]) as rsps:
+            rsps.post("http://plus.service", callback=plus_service_callback)
+            rsps.post("http://plus.service", callback=plus_service_callback)
+            rsps.post("http://plus.service", callback=plus_service_callback)
+            rsps.post("http://power.service", callback=power_service_callback)
+            rsps.post(
+                "http://multiply.service", callback=multiply_service_callback
+            )
+            result = await self.client.post(
+                "/eval", json={"expr": "5 + 5 + (2 * 3) + (5^2)"}
+            )
+            self.assertEqual(result.status, 200)
+            data = await result.json()
+            self.assertEqual(data, {"result": 41})
