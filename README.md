@@ -215,3 +215,14 @@ Nesse arquivo podemos ter múltiplas rotas, mas nesse exercício teremos apenas 
 
 
 Os testes para seu endpoint estão em `tests/test_operation_template.py`. Pode copiar esse código e salvar em um outro arquivo, por exemplo, `tests/test_operation_plus.py` para os testes da operação `+`.
+
+
+# Buildando projeto
+
+Para fazer o build, basta rodar o script `build.sh` passando como unico argumento o nome do seu projeto. Por ex:
+
+```
+build.sh plus
+```
+
+Seria um exemplo de como fazer o build da operação de `+`.
