@@ -19,3 +19,7 @@ class BaseApiTestCase(TestCase):
         await self.server.start_server()
 
         return client
+
+    async def tearDown(self):
+        if hasattr(self, "server"):
+            await self.server.close()

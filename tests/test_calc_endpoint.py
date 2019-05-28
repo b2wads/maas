@@ -11,6 +11,9 @@ class CalcEndpointTest(BaseApiTestCase):
     async def setUp(self):
         self.client = await self.aiohttp_client(app)
 
+    async def tearDown(self):
+        await super(CalcEndpointTest, self).tearDown()
+
     async def test_plus_simple_expression(self):
         """
         Confere que conseguimos avaliar uma expressão simples: a + b
