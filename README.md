@@ -204,3 +204,14 @@ Esse mesmo mapeamento vale para os serviços: Subtração, Divisão, Multiplica�
   "result": 9
 }
 ```
+
+
+# Escrevendo o endpoint de uma operação matemática
+
+
+A app que conterá o endpoint que implementa uma operação matemática está em `maas/app.py`.
+
+Nesse arquivo podemos ter múltiplas rotas, mas nesse exercício teremos apenas uma, a rota `/` que implementará uma operação matemática, dependendo de qual grupo você está e qual operação seu grupo deve implementar.
+
+
+Os testes para seu endpoint estão em `tests/test_operation_template.py`. Pode copiar esse código e salvar em um outro arquivo, por exemplo, `tests/test_operation_plus.py` para os testes da operação `+`.
