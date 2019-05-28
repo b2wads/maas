@@ -868,6 +868,12 @@ class Minus(Operation):
         else:
             raise NodeException("Node does not have enough children.")
 
+    async def eval(self) -> float:
+        lval = await self.left.eval()
+        rval = await self.right.eval()
+        result = await client.minus(lval, rval)
+        return float(result["result"])
+
 
 # Multiply two nodes
 class Times(Operation):
