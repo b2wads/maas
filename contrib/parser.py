@@ -21,6 +21,10 @@ import copy
 import math
 import re
 
+from maas.client import MathClient
+
+client = MathClient()
+
 
 # A general node-related exception
 class NodeException(Exception):
@@ -362,6 +366,10 @@ class Value(Node):
         # Evaluate the node
 
     def evaluate(self):
+        return float(self.value)
+        # The length of the value
+
+    async def eval(self):
         return float(self.value)
         # The length of the value
 
@@ -838,6 +846,12 @@ class Plus(Operation):
         else:
             raise NodeException("Node does not have enough children.")
 
+    async def eval(self) -> float:
+        lval = await self.left.eval()
+        rval = await self.right.eval()
+        result = await client.plus(lval, rval)
+        return float(result["result"])
+
 
 # Subtract two nodes
 class Minus(Operation):
@@ -853,6 +867,12 @@ class Minus(Operation):
             return self.left.evaluate() - self.right.evaluate()
         else:
             raise NodeException("Node does not have enough children.")
+
+    async def eval(self) -> float:
+        lval = await self.left.eval()
+        rval = await self.right.eval()
+        result = await client.minus(lval, rval)
+        return float(result["result"])
 
 
 # Multiply two nodes
@@ -870,6 +890,12 @@ class Times(Operation):
         else:
             raise NodeException("Node does not have enough children.")
             # Try to factor the node
+
+    async def eval(self) -> float:
+        lval = await self.left.eval()
+        rval = await self.right.eval()
+        result = await client.multiply(lval, rval)
+        return float(result["result"])
 
     def factor(self):
         # Factor the children first (if possibe)
@@ -985,6 +1011,12 @@ class Divide(Operation):
             raise NodeException("Node does not have enough children.")
             # Try to factor the node
 
+    async def eval(self) -> float:
+        lval = await self.left.eval()
+        rval = await self.right.eval()
+        result = await client.divide(lval, rval)
+        return float(result["result"])
+
     def factor(self):
         # Factor the children first (if possibe)
         # Left child
@@ -1087,6 +1119,12 @@ class Exponent(Operation):
                 return lvalue ** rvalue
         else:
             raise NodeException("Node does not have enough children.")
+
+    async def eval(self) -> float:
+        lval = await self.left.eval()
+        rval = await self.right.eval()
+        result = await client.power(lval, rval)
+        return float(result["result"])
 
 
 # Calculate the factorial of a node
