@@ -1,6 +1,7 @@
 import json
 
 from aioresponses import aioresponses, CallbackResult
+from asynctest import mock
 
 from maas.calc.app import app
 from tests.base import BaseApiTestCase
@@ -19,6 +20,37 @@ class CalcEndpointTest(BaseApiTestCase):
 
     async def tearDown(self):
         await super(CalcEndpointTest, self).tearDown()
+
+    async def test_invalid_expression(self):
+        with aioresponses(passthrough=["http://127.0.0.1"]) as rsps:
+            result = await self.client.post(
+                "/eval", json={"expr": "1 + 1 --+="}
+            )
+            self.assertEqual(result.status, 400)
+            data = await result.json()
+            self.assertEqual(
+                data,
+                {
+                    "result": None,
+                    "error": {"exc": mock.ANY, "reason": "Invalid Expression"},
+                },
+            )
+
+    async def test_error_on_async_eval(self):
+        with aioresponses(passthrough=["http://127.0.0.1"]) as rsps:
+            result = await self.client.post("/eval", json={"expr": "1 + 1"})
+            self.assertEqual(result.status, 500)
+            data = await result.json()
+            self.assertEqual(
+                data,
+                {
+                    "result": None,
+                    "error": {
+                        "exc": "Connection refused: POST http://plus.service",
+                        "reason": "Error evaluating expression",
+                    },
+                },
+            )
 
     async def test_plus_simple_expression(self):
         """
