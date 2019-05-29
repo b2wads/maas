@@ -7,5 +7,5 @@ if [ -z ${project_name} ];then
   exit 1
 fi
 
-docker build -t registry.api.pe.hmg.asgard.b2w.io/${project_name} . \
-&& docker push registry.api.pe.hmg.asgard.b2w.io/${project_name}
+docker build -t registry.pe.hmg.asgard.b2w.io/${project_name} . \
+&& docker push registry.pe.hmg.asgard.b2w.io/${project_name}
