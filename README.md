@@ -55,7 +55,7 @@ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 adicione em seu bashrc (`~/.bashrc`):
 
 ```
-export PYENV_ROOT="$HOME/.pyenv
+export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:~/.local/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
