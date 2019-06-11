@@ -75,6 +75,14 @@ Algo parecido com isso deve ser retornado.
 
 ## Instalando python 3.7
 
+
+**Atenção**: Para Distros baseadas em Debian (Ubuntu, Elementary, etc) instalem os seguintes pacotes:
+
+```
+zlib1g-dev libffi-dev
+```
+
+
 Para instalar, rode:
 
 ```
