@@ -55,7 +55,7 @@ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 adicione em seu bashrc (`~/.bashrc`):
 
 ```
-export PYENV_ROOT="$HOME/.pyenv
+export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:~/.local/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
@@ -74,6 +74,16 @@ pyenv 1.2.9-19-g7d02b246
 Algo parecido com isso deve ser retornado.
 
 ## Instalando python 3.7
+
+
+**Atenção**: Para Distros baseadas em Debian (Ubuntu, Elementary, etc) instalem os seguintes pacotes:
+
+```
+make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+```
+
 
 Para instalar, rode:
 
