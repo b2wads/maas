@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/b2wads/maas/tree/master.svg?style=shield)](https://circleci.com/gh/b2wads/maas)
+[![codecov](https://codecov.io/gh/b2wads/maas/branch/master/graph/badge.svg)](https://codecov.io/gh/b2wads/maas)
+
+
 # Math as a (µ)service - MaaS
 
 A ideia desse exercício é mostrar com seria uma arquitetura simples de micro-serviços.
