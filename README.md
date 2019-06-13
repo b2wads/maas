@@ -226,6 +226,23 @@ Nesse arquivo podemos ter múltiplas rotas, mas nesse exercício teremos apenas 
 
 Os testes para seu endpoint estão em `tests/test_operation_template.py`. Pode copiar esse código e salvar em um outro arquivo, por exemplo, `tests/test_operation_plus.py` para os testes da operação `+`.
 
+# Rodando localmente
+
+Para rodar o projeto localmente, faça:
+
+```
+pipenv run python -m maas
+```
+
+Obs: Para terminar o processo digite `^\` (`Ctrl+\`) no terminal.
+
+## Fazendo uma requisição de exemplo
+
+Depois que o projeto estiver rodando, podemos fazer requests HTTP em `http://localhost:8080/`. Um Exemplo:
+
+```
+curl -X POST http://localhost:8080
+```
 
 # Buildando projeto
 
