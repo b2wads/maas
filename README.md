@@ -23,6 +23,15 @@ O parser é bem simples e suporta:
 
 A implementação do parser é essa: https://github.com/PeterBeard/math-trees
 
+## u-serviços adicionais
+
+Cada operação matemática é implementada como um serviço separado, em repositório separado. Aqui estão os links para esses repositórios:
+
+ - Soma: https://github.com/b2wads/maas-plus
+ - Subtração: https://github.com/b2wads/maas-minus
+ - Divisão: https://github.com/b2wads/maas-divide
+ - Multiplicação: https://github.com/b2wads/maas-multiply
+ - Potência: https://github.com/b2wads/maas-power
 
 ### Exemplo de uma expressão válida
 
@@ -168,92 +177,12 @@ Esse é o servico que recebe e parseia a epressão matemática inicial. Então f
 }
 ```
 
-
-## Soma
-
-### Endpoints
-
-`POST /`
-
-### Entrada
-
-```
-{
-  "left": 30,
-  "right": 40
-}
-```
-
-
-### Saída
-
-```
-{
-  "result": 70
-}
-```
-
-Esse mesmo mapeamento vale para os serviços: Subtração, Divisão, Multiplicação.
-
-
-## Potência
-
-### Endpoints
-
-`POST /`
-
-### Entrada
-
-```
-{
-  "value": 3,
-  "power": 2
-}
-```
-
-### Saída
-
-```
-{
-  "result": 9
-}
-```
-
-
-# Escrevendo o endpoint de uma operação matemática
-
-
-A app que conterá o endpoint que implementa uma operação matemática está em `maas/app.py`.
-
-Nesse arquivo podemos ter múltiplas rotas, mas nesse exercício teremos apenas uma, a rota `/` que implementará uma operação matemática, dependendo de qual grupo você está e qual operação seu grupo deve implementar.
-
-
-Os testes para seu endpoint estão em `tests/test_operation_template.py`. Pode copiar esse código e salvar em um outro arquivo, por exemplo, `tests/test_operation_plus.py` para os testes da operação `+`.
-
 # Rodando localmente
 
 Para rodar o projeto localmente, faça:
 
 ```
-pipenv run python -m maas
+pipenv run python -m maas.calc
 ```
 
 Obs: Para terminar o processo digite `^\` (`Ctrl+\`) no terminal.
-
-## Fazendo uma requisição de exemplo
-
-Depois que o projeto estiver rodando, podemos fazer requests HTTP em `http://localhost:8080/`. Um Exemplo:
-
-```
-curl -X POST http://localhost:8080
-```
-
-# Buildando projeto
-
-Para fazer o build, basta rodar o script `build.sh` passando como unico argumento o nome do seu projeto. Por ex:
-
-```
-build.sh plus
-```
-
-Seria um exemplo de como fazer o build da operação de `+`.
