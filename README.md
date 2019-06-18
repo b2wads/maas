@@ -46,8 +46,12 @@ O parser que achamos possui bugs que não vamos resolver, pelo menos por enquant
  - `1 + 3 + 5 * (7^2)` retorna `248` mas deveria retornar `249`;
  - `8 + 2 - 10` retorna `2` e deveria retornar `0`;
 
-Vamos usar o que pudermos desse parser para podermos fazer o exercício de micro-serviço.
+Aparentemente rodas as expressões que possuem números "multi-digito" o parser está interpretando como multiplicação entre esses dígitos, exemplos:
 
+ - `80 + 1`, parseira para `8 0 * 1 +`, por isso o resulado é: `1` e não `81`.
+ - `12 - 40` -> `1 2 * 4 0 * -`. Retorna `2` e deveria retornar `-28`.
+
+Vamos usar o que pudermos desse parser para podermos fazer o exercício de micro-serviço.
 
 
 # Como instalar o projeto
